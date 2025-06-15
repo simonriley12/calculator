@@ -1,48 +1,52 @@
 #include <iostream>
 #include <cmath>
 #include <string>
-void gg(double x,double y,char op,std::string& ans);
+
+std::string gg(double x, double y, char op);
+
 int main()
 {
-    int x;
-    int y;
-    std::string ans;
+    double x, y;
     char op;
 
-    std::cout<<"This is an test mode of claculator.\n"<<"Fill the following condition.\n";
-    std::cout<<"x:";
-    std::cin>>x;std::cout<<std::endl;
-    std::cout<<"y:";
-    std::cin>>y;std::cout<<std::endl;
-    std::cout<<"Choose an operator:";
-    std::cin>> op;
-    gg(x,y,op,ans);
-    std::cout<<ans;
+    std::cout << "This is a test mode of calculator.\nFill the following condition.\n";
+    std::cout << "x: ";
+    std::cin >> x;
+
+    std::cout << "y: ";
+    std::cin >> y;
+
+    std::cout << "Choose an operator (+, -, *, /): ";
+    std::cin >> op;
+
+    std::string result = gg(x, y, op);
+    std::cout << "Result: " << result << std::endl;
+
     return 0;
 }
 
-void gg(double x,double y,char op,std::string& ans)
+std::string gg(double x, double y, char op)
 {
-   switch(op)
-   {
-    case '+':
-             ans=x+y;
-             std::cout<<ans;
-             break;
-             
+    double res;
+    switch (op)
+    {
+        case '+':
+            res = x + y;
+            break;
+        case '-':
+            res = x - y;
+            break;
+        case '*':
+            res = x * y;
+            break;
+        case '/':
+            if (y == 0)
+                return "Error: Division by zero.";
+            res = x / y;
+            break;
+        default:
+            return "Error: Invalid operator.";
+    }
 
-    case '-':
-             ans=x-y;
-             std::cout<<ans;
-             break;
-    case '*':
-             ans=x*y;
-             std::cout<<ans;
-             break;
-    case '/':
-             ans=x/y;
-             std::cout<<ans;         
-             break;
-   }
-    
-}   
+    return std::to_string(res);
+}
